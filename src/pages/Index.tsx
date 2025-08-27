@@ -64,6 +64,22 @@ const Index = () => {
           <Badge variant="secondary" className="mb-8 text-lg px-6 py-2">
             Se seu instituto opera com pelo menos R$ 100K/mês… oportunidade de integrar tecnologia pioneira…
           </Badge>
+
+          {/* Video Section */}
+          <div className="max-w-4xl mx-auto mb-8">
+            <div className="relative aspect-video rounded-lg overflow-hidden shadow-2xl">
+              <iframe
+                src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                title="Apresentação SCALIUM.AI"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
+            </div>
+            <p className="text-center text-sm text-muted-foreground mt-3">
+              Veja como a SCALIUM.AI transforma o atendimento médico em resultados
+            </p>
+          </div>
           
           <Dialog open={showDemo} onOpenChange={setShowDemo}>
             <DialogTrigger asChild>
