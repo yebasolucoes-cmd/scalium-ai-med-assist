@@ -43,12 +43,11 @@ const Index = () => {
       {/* Hero Section */}
       <section className="pt-16 pb-20 px-4 text-center bg-gradient-to-br from-primary/5 to-accent/5">
         <div className="max-w-6xl mx-auto">
-          <div className="flex justify-center mb-8">
-            <img 
-              src="/lovable-uploads/3c84c696-bd8e-474e-9329-a64d865861ba.png" 
-              alt="SCALIUM AI - IA PARA ESCALAR" 
-              className="h-20 w-auto"
-            />
+          <div className="flex items-center justify-center mb-8">
+            <div className="w-16 h-16 bg-primary rounded-lg flex items-center justify-center mr-4">
+              <span className="text-3xl font-bold text-white">S</span>
+            </div>
+            <div className="text-2xl font-bold text-primary">SCALIUM AI</div>
           </div>
           
           <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
