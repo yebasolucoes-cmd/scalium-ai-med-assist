@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { CheckCircle, Star, TrendingUp, Clock, Shield, Zap } from "lucide-react";
+import { CheckCircle, Star, TrendingUp, Clock, Shield, Zap, Instagram, Linkedin } from "lucide-react";
 import LGPDForm from "@/components/LGPDForm";
 
 const Index = () => {
@@ -278,6 +278,40 @@ const Index = () => {
             <Button size="lg" variant="outline" className="text-xl px-8 py-4 border-white text-white hover:bg-white hover:text-primary">
               Falar com Consultor
             </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Media Section */}
+      <section className="py-16 px-4 bg-gradient-to-r from-primary/10 to-accent/10">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="flex justify-center mb-8">
+            <img 
+              src="/lovable-uploads/3c84c696-bd8e-474e-9329-a64d865861ba.png" 
+              alt="SCALIUM AI - IA PARA ESCALAR" 
+              className="h-16 w-auto"
+            />
+          </div>
+          <h2 className="text-3xl font-bold text-foreground mb-8">Conecte-se conosco</h2>
+          <div className="flex justify-center gap-6">
+            <a
+              href="https://instagram.com/scalium_ai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-6 py-3 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow group"
+            >
+              <Instagram className="h-6 w-6 text-pink-500 group-hover:scale-110 transition-transform" />
+              <span className="font-semibold text-foreground">@scalium_ai</span>
+            </a>
+            <a
+              href="https://linkedin.com/in/maykelmarques"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 px-6 py-3 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow group"
+            >
+              <Linkedin className="h-6 w-6 text-blue-600 group-hover:scale-110 transition-transform" />
+              <span className="font-semibold text-foreground">@maykelmarques</span>
+            </a>
           </div>
         </div>
       </section>
