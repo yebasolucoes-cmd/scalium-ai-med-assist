@@ -1,13 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { CheckCircle, Star, TrendingUp, Clock, Shield, Zap, Instagram, Linkedin } from "lucide-react";
 import LGPDForm from "@/components/LGPDForm";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import { useTracking } from "@/hooks/useTracking";
 
 const Index = () => {
   const [showDemo, setShowDemo] = useState(false);
+  const { trackInteraction } = useTracking();
+
+  useEffect(() => {
+    trackInteraction('page_view', 'home_page');
+    
+    // Gerar session ID se não existir
+    if (!sessionStorage.getItem('session_id')) {
+      sessionStorage.setItem('session_id', crypto.randomUUID());
+    }
+  }, [trackInteraction]);
 
   const results = [
     { number: "+1.541%", label: "Crescimento médio em geração de leads desde a primeira ativação" },
@@ -39,7 +51,15 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      {/* Marca d'água de fundo */}
+      <div 
+        className="fixed inset-0 z-0 opacity-5 bg-no-repeat bg-center bg-contain pointer-events-none"
+        style={{
+          backgroundImage: 'url(/lovable-uploads/55e1e9f6-c9cd-450c-8d18-087b4eb988a9.png)',
+        }}
+      />
+      <div className="relative z-10">
       {/* Hero Section */}
       <section className="pt-16 pb-20 px-4 text-center bg-gradient-to-br from-primary/5 to-accent/5">
         <div className="max-w-6xl mx-auto">
@@ -81,16 +101,31 @@ const Index = () => {
             </p>
           </div>
           
-          <Dialog open={showDemo} onOpenChange={setShowDemo}>
-            <DialogTrigger asChild>
-              <Button size="lg" className="text-xl px-8 py-4 mb-8">
-                Agendar Demo da IA em Funcionamento
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-md">
-              <LGPDForm onClose={() => setShowDemo(false)} />
-            </DialogContent>
-          </Dialog>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+            <Dialog open={showDemo} onOpenChange={setShowDemo}>
+              <DialogTrigger asChild>
+                <Button 
+                  size="lg" 
+                  className="text-xl px-8 py-4"
+                  onClick={() => trackInteraction('click', 'demo_button', 'Agendar Demo da IA em Funcionamento')}
+                >
+                  Agendar Demo da IA em Funcionamento
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-md">
+                <LGPDForm onClose={() => setShowDemo(false)} source="hero_demo_button" />
+              </DialogContent>
+            </Dialog>
+            
+            <WhatsAppButton
+              message="Quero saber como funciona Scalium AI"
+              variant="outline"
+              size="lg"
+              className="text-xl px-8 py-4"
+            >
+              Conheça nosso assistente
+            </WhatsAppButton>
+          </div>
 
           <div className="bg-white p-6 rounded-lg shadow-lg inline-block">
             <div className="text-4xl font-bold text-primary mb-2">+1.541%</div>
@@ -102,7 +137,7 @@ const Index = () => {
       {/* Results Section */}
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
             {results.map((result, index) => (
               <Card key={index} className="text-center p-8 border-2 hover:border-primary transition-colors">
                 <CardContent className="p-0">
@@ -111,6 +146,17 @@ const Index = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+          
+          {/* CTA adicional */}
+          <div className="text-center">
+            <WhatsAppButton
+              message="Quero saber como funciona Scalium AI"
+              size="lg"
+              className="text-lg px-6 py-3"
+            >
+              Teste nossa IA agora mesmo
+            </WhatsAppButton>
           </div>
         </div>
       </section>
@@ -130,7 +176,7 @@ const Index = () => {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16">Diferenciais únicos para medicina premium</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
             {pillars.map((pillar, index) => (
               <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
                 <CardContent className="p-0">
@@ -140,6 +186,25 @@ const Index = () => {
               </Card>
             ))}
           </div>
+          
+          {/* CTA adicional */}
+          <div className="text-center">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="text-lg px-6 py-3"
+                  onClick={() => trackInteraction('click', 'pillars_cta', 'Quero uma demonstração personalizada')}
+                >
+                  Quero uma demonstração personalizada
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="max-w-md">
+                <LGPDForm onClose={() => {}} source="pillars_demo_button" />
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
       </section>
 
@@ -147,7 +212,7 @@ const Index = () => {
       <section className="py-20 px-4 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16">Cases de sucesso comprovados</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
             {cases.map((case_, index) => (
               <Card key={index} className="p-6 text-center">
                 <CardContent className="p-0">
@@ -168,6 +233,18 @@ const Index = () => {
               </Card>
             ))}
           </div>
+          
+          {/* CTA adicional */}
+          <div className="text-center">
+            <WhatsAppButton
+              message="Quero saber como posso ter esses resultados na minha clínica"
+              variant="secondary"
+              size="lg"
+              className="text-lg px-6 py-3"
+            >
+              Como posso ter esses resultados?
+            </WhatsAppButton>
+          </div>
         </div>
       </section>
 
@@ -175,7 +252,7 @@ const Index = () => {
       <section className="py-20 px-4 bg-gradient-to-r from-primary/5 to-accent/5">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-16">Como funciona em 4 etapas</h2>
-          <div className="grid md:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-4 gap-8 mb-12">
             <div className="text-center">
               <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
               <h3 className="text-xl font-semibold mb-2">Configuração</h3>
@@ -196,6 +273,17 @@ const Index = () => {
               <h3 className="text-xl font-semibold mb-2">Otimização</h3>
               <p className="text-muted-foreground">Monitoramento e ajustes contínuos baseados em métricas</p>
             </div>
+          </div>
+          
+          {/* CTA adicional */}
+          <div className="text-center">
+            <WhatsAppButton
+              message="Quero começar a implementação hoje mesmo!"
+              size="lg"
+              className="text-lg px-6 py-3"
+            >
+              Quero começar hoje mesmo!
+            </WhatsAppButton>
           </div>
         </div>
       </section>
@@ -267,17 +355,27 @@ const Index = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Dialog>
               <DialogTrigger asChild>
-                <Button size="lg" variant="secondary" className="text-xl px-8 py-4">
+                <Button 
+                  size="lg" 
+                  variant="secondary" 
+                  className="text-xl px-8 py-4"
+                  onClick={() => trackInteraction('click', 'final_cta_demo', 'Quero aumentar meus resultados')}
+                >
                   Quero aumentar meus resultados
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-md">
-                <LGPDForm onClose={() => {}} />
+                <LGPDForm onClose={() => {}} source="final_cta_demo_button" />
               </DialogContent>
             </Dialog>
-            <Button size="lg" variant="outline" className="text-xl px-8 py-4 border-white text-white hover:bg-white hover:text-primary">
-              Falar com Consultor
-            </Button>
+            <WhatsAppButton
+              message="Quero saber como funciona Scalium AI"
+              variant="outline"
+              size="lg"
+              className="text-xl px-8 py-4 border-white text-white hover:bg-white hover:text-primary"
+            >
+              Conheça nosso assistente
+            </WhatsAppButton>
           </div>
         </div>
       </section>
@@ -317,11 +415,43 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-4 bg-muted/50 text-center">
-        <p className="text-sm text-muted-foreground">
-          Conforme normas do CFM e ANVISA. Esta IA não realiza diagnóstico médico.
-        </p>
+      <footer className="py-12 px-4 bg-muted/50">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+              <h3 className="font-semibold mb-4">Endereços</h3>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p>R.: Nuporanga, 97 – Vl Mariana<br />São Paulo, SP</p>
+                <p>R.: Dr. Miguel Zacarias 56 Vl Progresso<br />Maringá - PR</p>
+              </div>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Contatos</h3>
+              <div className="space-y-2 text-sm text-muted-foreground">
+                <p>São Paulo: (11) 5192-6333</p>
+                <p>Maringá: (44) 3346-8779</p>
+              </div>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Teste agora</h3>
+              <WhatsAppButton
+                message="Quero saber como funciona Scalium AI"
+                variant="secondary"
+                className="w-full"
+              >
+                Fale com nossa IA
+              </WhatsAppButton>
+            </div>
+          </div>
+          
+          <div className="text-center pt-8 border-t">
+            <p className="text-sm text-muted-foreground">
+              Conforme normas do CFM e ANVISA. Esta IA não realiza diagnóstico médico.
+            </p>
+          </div>
+        </div>
       </footer>
+      </div>
     </div>
   );
 };

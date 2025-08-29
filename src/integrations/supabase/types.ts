@@ -14,7 +14,81 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      leads: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          ip_address: string | null
+          message: string | null
+          name: string | null
+          page_url: string | null
+          phone: string | null
+          source: string
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          ip_address?: string | null
+          message?: string | null
+          name?: string | null
+          page_url?: string | null
+          phone?: string | null
+          source: string
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          ip_address?: string | null
+          message?: string | null
+          name?: string | null
+          page_url?: string | null
+          phone?: string | null
+          source?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
+      page_interactions: {
+        Row: {
+          created_at: string
+          element_id: string | null
+          element_text: string | null
+          event_type: string
+          id: string
+          ip_address: string | null
+          page_url: string
+          session_id: string | null
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string
+          element_id?: string | null
+          element_text?: string | null
+          event_type: string
+          id?: string
+          ip_address?: string | null
+          page_url: string
+          session_id?: string | null
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string
+          element_id?: string | null
+          element_text?: string | null
+          event_type?: string
+          id?: string
+          ip_address?: string | null
+          page_url?: string
+          session_id?: string | null
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

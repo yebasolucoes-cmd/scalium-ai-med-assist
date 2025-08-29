@@ -4,12 +4,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
+import { useTracking } from "@/hooks/useTracking";
 
 interface LGPDFormProps {
   onClose: () => void;
+  source?: string;
 }
 
-const LGPDForm = ({ onClose }: LGPDFormProps) => {
+const LGPDForm = ({ onClose, source = "form_demo" }: LGPDFormProps) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,6 +22,7 @@ const LGPDForm = ({ onClose }: LGPDFormProps) => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const { trackLead } = useTracking();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,7 +49,15 @@ const LGPDForm = ({ onClose }: LGPDFormProps) => {
     };
 
     try {
-      // Aqui faria a chamada para API de criação de lead + registro LGPD
+      // Registrar lead no banco de dados
+      await trackLead(
+        formData.name,
+        formData.email,
+        formData.phone,
+        `Clínica: ${formData.clinic}`,
+        source
+      );
+      
       console.log("Registrando lead com consentimento LGPD:", consentRecord);
       
       toast({
