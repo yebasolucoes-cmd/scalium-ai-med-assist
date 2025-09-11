@@ -51,69 +51,71 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background relative">
-      {/* Marca d'água de fundo */}
-      <div 
-        className="fixed inset-0 z-0 opacity-5 bg-no-repeat bg-center bg-contain pointer-events-none"
-        style={{
-          backgroundImage: 'url(/lovable-uploads/55e1e9f6-c9cd-450c-8d18-087b4eb988a9.png)',
-        }}
-      />
-      <div className="relative z-10">
-      {/* Hero Section */}
-      <section className="pt-16 pb-20 px-4 text-center bg-gradient-to-br from-primary/5 to-accent/5">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex justify-center mb-8">
+    <div className="min-h-screen bg-background">
+      {/* Header Navigation - estilo Growth Machine */}
+      <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center">
             <img 
               src="/lovable-uploads/3c84c696-bd8e-474e-9329-a64d865861ba.png" 
-              alt="SCALIUM AI - IA PARA ESCALAR" 
-              className="h-20 w-auto"
+              alt="SCALIUM AI" 
+              className="h-8 w-auto"
             />
           </div>
+          <nav className="hidden md:flex items-center space-x-8">
+            <a href="#solucoes" className="text-foreground hover:text-primary transition-colors">SOLUÇÕES</a>
+            <a href="#cases" className="text-foreground hover:text-primary transition-colors">CASES</a>
+            <a href="#sobre" className="text-foreground hover:text-primary transition-colors">SOBRE</a>
+          </nav>
+          <Dialog open={showDemo} onOpenChange={setShowDemo}>
+            <DialogTrigger asChild>
+              <Button 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-2"
+                onClick={() => trackInteraction('click', 'header_cta', 'DIAGNÓSTICO GRATUITO')}
+              >
+                DIAGNÓSTICO GRATUITO
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-w-md">
+              <LGPDForm onClose={() => setShowDemo(false)} source="header_cta_button" />
+            </DialogContent>
+          </Dialog>
+        </div>
+      </header>
+
+      {/* Hero Section - estilo Growth Machine */}
+      <section className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-background via-background to-primary/5 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_35%,rgba(255,255,255,.1)_50%,transparent_65%)] bg-[length:20px_20px] opacity-20"></div>
+        
+        <div className="max-w-6xl mx-auto text-center relative z-10 pt-20">
+          <Badge variant="secondary" className="mb-6 text-sm px-4 py-2 bg-primary/10 text-primary border-primary/20">
+            • A SOLUÇÃO IDEAL PARA SUA CLÍNICA
+          </Badge>
           
-          <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
-            SCALIUM.AI — Atendimento IA especializado em{" "}
-            <span className="text-primary">medicina premium</span>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-8 leading-tight">
+            A única IA de Atendimento que te entrega{" "}
+            <span className="text-primary block">mais receita</span>
+            <span className="text-primary">menos esforço</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto">
-            A primeira Inteligência Artificial de atendimento desenvolvida exclusivamente para institutos médicos e clínicas de alto padrão. 
-            Transforme seu atendimento em uma máquina de agendamentos 24/7.
+          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed">
+            Implementamos um sistema de atendimento inteligente com IA especializada para transformar esforço em resultado previsível na medicina premium.
           </p>
           
-          <Badge variant="secondary" className="mb-8 text-lg px-6 py-2">
-            Se seu instituto opera com pelo menos R$ 100K/mês… oportunidade de integrar tecnologia pioneira…
-          </Badge>
-
-          {/* Video Section */}
-          <div className="max-w-4xl mx-auto mb-8">
-            <div className="relative aspect-video rounded-lg overflow-hidden shadow-2xl">
-              <iframe
-                src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-                title="Apresentação SCALIUM.AI"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
-            </div>
-            <p className="text-center text-sm text-muted-foreground mt-3">
-              Veja como a SCALIUM.AI transforma o atendimento médico em resultados
-            </p>
-          </div>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <Dialog open={showDemo} onOpenChange={setShowDemo}>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+            <Dialog>
               <DialogTrigger asChild>
                 <Button 
                   size="lg" 
-                  className="text-xl px-8 py-4"
-                  onClick={() => trackInteraction('click', 'demo_button', 'Agendar Demo da IA em Funcionamento')}
+                  className="text-lg px-8 py-4 bg-primary hover:bg-primary/90 text-primary-foreground"
+                  onClick={() => trackInteraction('click', 'hero_primary_cta', 'DIAGNÓSTICO GRATUITO')}
                 >
-                  Agendar Demo da IA em Funcionamento
+                  DIAGNÓSTICO GRATUITO →
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-md">
-                <LGPDForm onClose={() => setShowDemo(false)} source="hero_demo_button" />
+                <LGPDForm onClose={() => {}} source="hero_primary_cta" />
               </DialogContent>
             </Dialog>
             
@@ -121,28 +123,46 @@ const Index = () => {
               message="Quero saber como funciona Scalium AI"
               variant="outline"
               size="lg"
-              className="text-xl px-8 py-4"
+              className="text-lg px-8 py-4 border-2"
             >
-              Conheça nosso assistente
+              SAIBA MAIS
             </WhatsAppButton>
           </div>
 
-          <div className="bg-white p-6 rounded-lg shadow-lg inline-block">
-            <div className="text-4xl font-bold text-primary mb-2">+1.541%</div>
-            <div className="text-sm text-muted-foreground">de crescimento em geração de leads desde a ativação</div>
+          {/* Logos dos Clientes - estilo Growth Machine */}
+          <div className="border-t pt-8">
+            <p className="text-sm text-muted-foreground mb-6 uppercase tracking-wider">CLÍNICAS QUE JÁ CONFIAM NA SCALIUM.AI</p>
+            <div className="flex items-center justify-center space-x-12 opacity-60">
+              <div className="text-lg font-semibold text-muted-foreground">Cirurgia Plástica SP</div>
+              <div className="text-lg font-semibold text-muted-foreground">Dermatologia RJ</div>
+              <div className="text-lg font-semibold text-muted-foreground">Implantodontia BH</div>
+              <div className="text-lg font-semibold text-muted-foreground">Estética PR</div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Results Section */}
-      <section className="py-20 px-4">
+      {/* Soluções Section - estilo Growth Machine */}
+      <section id="solucoes" className="py-20 px-4 bg-muted/30">
         <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <Badge variant="secondary" className="mb-4 text-sm px-4 py-2 bg-primary/10 text-primary border-primary/20">
+              • SOLUÇÕES
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Como a SCALIUM.AI resolve seus problemas
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Automatize o atendimento, qualifique leads e agende mais consultas com tecnologia de ponta
+            </p>
+          </div>
+          
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {results.map((result, index) => (
-              <Card key={index} className="text-center p-8 border-2 hover:border-primary transition-colors">
+              <Card key={index} className="text-center p-8 bg-white border-0 shadow-lg hover:shadow-xl transition-shadow">
                 <CardContent className="p-0">
-                  <div className="text-4xl font-bold text-primary mb-4">{result.number}</div>
-                  <p className="text-muted-foreground">{result.label}</p>
+                  <div className="text-5xl font-bold text-primary mb-4">{result.number}</div>
+                  <p className="text-muted-foreground text-lg">{result.label}</p>
                 </CardContent>
               </Card>
             ))}
@@ -153,7 +173,7 @@ const Index = () => {
             <WhatsAppButton
               message="Quero saber como funciona Scalium AI"
               size="lg"
-              className="text-lg px-6 py-3"
+              className="text-lg px-8 py-4 bg-primary hover:bg-primary/90"
             >
               Teste nossa IA agora mesmo
             </WhatsAppButton>
@@ -209,26 +229,37 @@ const Index = () => {
       </section>
 
       {/* Cases */}
-      <section className="py-20 px-4 bg-muted/30">
+      <section id="cases" className="py-20 px-4 bg-background">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16">Cases de sucesso comprovados</h2>
+          <div className="text-center mb-16">
+            <Badge variant="secondary" className="mb-4 text-sm px-4 py-2 bg-primary/10 text-primary border-primary/20">
+              • CASES DE SUCESSO
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              Resultados reais de clínicas reais
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Veja como a SCALIUM.AI transformou o atendimento dessas clínicas em máquinas de resultados
+            </p>
+          </div>
+          
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {cases.map((case_, index) => (
-              <Card key={index} className="p-6 text-center">
+              <Card key={index} className="p-8 text-center bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
                 <CardContent className="p-0">
-                  <h3 className="text-xl font-semibold mb-4">{case_.title}</h3>
-                  <div className="flex justify-center items-center gap-4 mb-4">
-                    <div>
-                      <div className="text-2xl font-bold text-muted-foreground">{case_.before}</div>
-                      <div className="text-sm">Antes</div>
+                  <h3 className="text-xl font-semibold mb-6 text-foreground">{case_.title}</h3>
+                  <div className="flex justify-center items-center gap-6 mb-6">
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-muted-foreground mb-1">{case_.before}</div>
+                      <div className="text-sm text-muted-foreground">Antes</div>
                     </div>
-                    <div className="text-accent">→</div>
-                    <div>
-                      <div className="text-2xl font-bold text-primary">{case_.after}</div>
-                      <div className="text-sm">Depois</div>
+                    <div className="text-primary text-2xl">→</div>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-primary mb-1">{case_.after}</div>
+                      <div className="text-sm text-muted-foreground">Depois</div>
                     </div>
                   </div>
-                  <Badge className="bg-accent text-accent-foreground">+{case_.growth}%</Badge>
+                  <Badge className="bg-primary text-primary-foreground text-lg px-4 py-2">+{case_.growth}%</Badge>
                 </CardContent>
               </Card>
             ))}
@@ -238,9 +269,8 @@ const Index = () => {
           <div className="text-center">
             <WhatsAppButton
               message="Quero saber como posso ter esses resultados na minha clínica"
-              variant="secondary"
               size="lg"
-              className="text-lg px-6 py-3"
+              className="text-lg px-8 py-4 bg-primary hover:bg-primary/90"
             >
               Como posso ter esses resultados?
             </WhatsAppButton>
@@ -348,20 +378,30 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-20 px-4 bg-primary text-primary-foreground text-center">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold mb-8">Pronto para transformar seu atendimento?</h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      {/* Final CTA - estilo Growth Machine */}
+      <section className="py-32 px-4 bg-primary text-primary-foreground text-center relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_35%,rgba(255,255,255,.1)_50%,transparent_65%)] bg-[length:30px_30px] opacity-10"></div>
+        
+        <div className="max-w-4xl mx-auto relative z-10">
+          <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
+            Pronto para transformar<br />
+            <span className="text-primary-foreground/90">seu atendimento?</span>
+          </h2>
+          <p className="text-xl md:text-2xl mb-12 text-primary-foreground/80 max-w-2xl mx-auto">
+            Junte-se às clínicas que já multiplicaram seus resultados com a SCALIUM.AI
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Dialog>
               <DialogTrigger asChild>
                 <Button 
                   size="lg" 
                   variant="secondary" 
-                  className="text-xl px-8 py-4"
-                  onClick={() => trackInteraction('click', 'final_cta_demo', 'Quero aumentar meus resultados')}
+                  className="text-xl px-10 py-5 bg-white text-primary hover:bg-white/90"
+                  onClick={() => trackInteraction('click', 'final_cta_demo', 'DIAGNÓSTICO GRATUITO')}
                 >
-                  Quero aumentar meus resultados
+                  DIAGNÓSTICO GRATUITO →
                 </Button>
               </DialogTrigger>
               <DialogContent className="max-w-md">
@@ -372,9 +412,9 @@ const Index = () => {
               message="Quero saber como funciona Scalium AI"
               variant="outline"
               size="lg"
-              className="text-xl px-8 py-4 border-white text-white hover:bg-white hover:text-primary"
+              className="text-xl px-10 py-5 border-2 border-white text-white hover:bg-white hover:text-primary"
             >
-              Conheça nosso assistente
+              FALAR COM CONSULTOR
             </WhatsAppButton>
           </div>
         </div>
@@ -451,7 +491,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-      </div>
     </div>
   );
 };
