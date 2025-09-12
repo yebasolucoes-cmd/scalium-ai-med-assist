@@ -9,7 +9,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { useTracking } from "@/hooks/useTracking";
 
 const Index = () => {
-  const [showDemo, setShowDemo] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { trackInteraction } = useTracking();
 
   useEffect(() => {
@@ -22,24 +22,75 @@ const Index = () => {
   }, [trackInteraction]);
 
   const results = [
-    { number: "+1.541%", label: "Crescimento médio em geração de leads desde a primeira ativação" },
-    { number: "24/7", label: "Atendimento consultivo sem custo de equipe adicional" },
-    { number: "73%", label: "Taxa média de conversão em agendamentos qualificados" }
+    { number: "+1.541%", description: "Crescimento médio em geração de leads desde a primeira ativação" },
+    { number: "24/7", description: "Atendimento consultivo sem custo de equipe adicional" },
+    { number: "73%", description: "Taxa média de conversão em agendamentos qualificados" }
   ];
 
   const pillars = [
-    { icon: Zap, title: "Cadência automatizada e inteligente" },
-    { icon: Shield, title: "Integração com principais CRMs" },
-    { icon: TrendingUp, title: "Memória infinita e evolução constante" },
-    { icon: CheckCircle, title: "Prompts adaptados para medicina premium (CFM/ANVISA)" },
-    { icon: Star, title: "Abordagem sob medida (SPIN, GPCT, RDO, BANT adaptado)" },
-    { icon: Clock, title: "Conversas naturais sem traços robóticos" }
+    {
+      title: "Cadência Automatizada e Inteligente",
+      subtitle: "⏰ Timing Estratégico Perfeito",
+      description: "Segue cadência estruturada com espaçamento estratégico entre abordagens, garantindo contato no momento ideal.",
+      features: ["Sequências personalizadas por perfil de lead", "Horários otimizados para medicina premium", "Frequência adaptada ao comportamento do prospect", "Follow-ups inteligentes baseados em interações"]
+    },
+    {
+      title: "Integração com os Principais CRMs",
+      subtitle: "🔗 Conectividade Total",
+      description: "Compatível com diversos sistemas, conecta informações coletadas ao seu funil em tempo real, sem retrabalho.",
+      features: ["Integração nativa com HubSpot, Salesforce, Pipedrive", "Sincronização automática de dados de contato", "Relatórios em tempo real no seu CRM", "Histórico completo de interações preservado"]
+    },
+    {
+      title: "Memória Infinita e Evolução Constante",
+      subtitle: "🧠 Aprendizado Contínuo",
+      description: "Aprende com respostas dos leads, ajusta discurso, refina argumentos e aumenta conversão de forma autônoma.",
+      features: ["Machine learning especializado em medicina", "Otimização automática de abordagens", "Identificação de padrões de objeções", "Melhoria contínua da taxa de conversão"]
+    },
+    {
+      title: "Prompts Adaptados para Medicina Premium",
+      subtitle: "🎯 Especialização Setorial",
+      description: "Construímos prompts 100% alinhados ao mercado médico, com ajustes baseados no seu posicionamento real.",
+      features: ["Linguagem médica adequada por especialidade", "Abordagem respeitosa para pacientes premium", "Compliance com normas do CFM e ANVISA", "Personalização por tipo de procedimento"]
+    },
+    {
+      title: "Abordagem Sob Medida para Cada Lead",
+      subtitle: "📋 Frameworks de Atendimento Médico",
+      description: "Utiliza SPIN Selling, GPCT e RDO adaptados para medicina, interpretando respostas e quebrando objeções estrategicamente.",
+      features: ["Qualificação médica especializada (BANT adaptado)", "Descoberta de necessidades específicas de saúde", "Quebra de objeções comuns em medicina premium", "Condução natural para agendamento de consultas"]
+    },
+    {
+      title: "Conversas Naturais Sem Traços Robóticos",
+      subtitle: "🗣️ Experiência Humana Premium",
+      description: "Voz feminina profissional, linguagem empática e condução fluida que transmite confiança e segurança.",
+      features: ["Tom respeitoso adequado para medicina", "Empatia programada para situações sensíveis", "Linguagem clara e acessível para pacientes", "Personalidade que representa bem sua clínica"]
+    }
   ];
 
   const cases = [
-    { title: "Cirurgia Plástica (SP)", before: 12, after: 47, growth: 292 },
-    { title: "Dermatologia Estética (RJ)", before: 18, after: 73, growth: 306 },
-    { title: "Implantodontia (BH)", before: 8, after: 34, growth: 325 }
+    {
+      company: "Instituto de Cirurgia Plástica",
+      industry: "Cirurgia Estética",
+      name: "Dr. Eduardo Martins - São Paulo",
+      before: "12 agendamentos/mês",
+      after: "47 agendamentos/mês (+292%)",
+      testimonial: "Transformou completamente nosso atendimento."
+    },
+    {
+      company: "Centro de Dermatologia Avançada",
+      industry: "Dermatologia Estética", 
+      name: "Dra. Patricia Santos - Rio de Janeiro",
+      before: "18 consultas/mês",
+      after: "73 consultas/mês (+306%)",
+      testimonial: "Nunca imaginei que IA pudesse entender medicina assim."
+    },
+    {
+      company: "Clínica Odontológica Premium",
+      industry: "Implantodontia",
+      name: "Dr. Ricardo Campos - Belo Horizonte",
+      before: "8 tratamentos/mês",
+      after: "34 tratamentos/mês (+325%)",
+      testimonial: "ROI foi recuperado na primeira semana."
+    }
   ];
 
   const guarantees = [
@@ -51,8 +102,8 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header Navigation - estilo Growth Machine */}
+    <div className="min-h-screen">
+      {/* Header Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center">
@@ -67,427 +118,550 @@ const Index = () => {
             <a href="#cases" className="text-foreground hover:text-primary transition-colors">CASES</a>
             <a href="#sobre" className="text-foreground hover:text-primary transition-colors">SOBRE</a>
           </nav>
-          <Dialog open={showDemo} onOpenChange={setShowDemo}>
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
               <Button 
                 className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-2"
-                onClick={() => trackInteraction('click', 'header_cta', 'DIAGNÓSTICO GRATUITO')}
+                onClick={() => trackInteraction('click', 'header_cta', 'Agendar Demo da IA em Funcionamento')}
               >
-                DIAGNÓSTICO GRATUITO
+                Agendar Demo da IA em Funcionamento
               </Button>
             </DialogTrigger>
             <DialogContent className="max-w-md">
-              <LGPDForm onClose={() => setShowDemo(false)} source="header_cta_button" />
+              <LGPDForm onClose={() => setIsDialogOpen(false)} source="header_cta_button" />
             </DialogContent>
           </Dialog>
         </div>
       </header>
 
-      {/* Hero Section - estilo Growth Machine */}
-      <section className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-background via-background to-primary/5 relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_35%,rgba(255,255,255,.1)_50%,transparent_65%)] bg-[length:20px_20px] opacity-20"></div>
-        
-        <div className="max-w-6xl mx-auto text-center relative z-10 pt-20">
-          <Badge variant="secondary" className="mb-6 text-sm px-4 py-2 bg-primary/10 text-primary border-primary/20">
-            • A SOLUÇÃO IDEAL PARA SUA CLÍNICA
-          </Badge>
-          
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-foreground mb-8 leading-tight">
-            A única IA de Atendimento que te entrega{" "}
-            <span className="text-primary block">mais receita</span>
-            <span className="text-primary">menos esforço</span>
+      {/* Hero Section */}
+      <section className="min-h-screen flex items-center justify-center px-4 py-20 bg-gradient-to-br from-background via-background to-primary/5">
+        <div className="max-w-6xl mx-auto text-center pt-20">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            A Primeira Inteligência Artificial de Atendimento<br />
+            <span className="text-primary">Desenvolvida Exclusivamente</span><br />
+            Para Clínicas e Institutos Médicos de Alto Padrão
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed">
-            Implementamos um sistema de atendimento inteligente com IA especializada para transformar esforço em resultado previsível na medicina premium.
+          <p className="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed opacity-90">
+            Escale suas vendas deixando o trabalho repetitivo com a<br />
+            Atendimento IA especializada em medicina
           </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button 
-                  size="lg" 
-                  className="text-lg px-8 py-4 bg-primary hover:bg-primary/90 text-primary-foreground"
-                  onClick={() => trackInteraction('click', 'hero_primary_cta', 'DIAGNÓSTICO GRATUITO')}
-                >
-                  DIAGNÓSTICO GRATUITO →
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-md">
-                <LGPDForm onClose={() => {}} source="hero_primary_cta" />
-              </DialogContent>
-            </Dialog>
+
+          <p className="text-lg mb-8 max-w-4xl mx-auto leading-relaxed opacity-80">
+            A primeira Inteligência Artificial de atendimento desenvolvida especificamente<br />
+            para institutos médicos e clínicas de alto padrão, transforme o seu atendimento em uma máquina de agendamento 24/7.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+            <Button 
+              onClick={() => setIsDialogOpen(true)}
+              size="lg" 
+              className="text-xl px-8 py-6 bg-primary hover:bg-primary/90 text-white font-semibold shadow-lg"
+            >
+              Agendar Demo da IA em Funcionamento
+            </Button>
             
-            <WhatsAppButton
-              message="Quero saber como funciona Scalium AI"
-              variant="outline"
-              size="lg"
-              className="text-lg px-8 py-4 border-2"
-            >
-              SAIBA MAIS
-            </WhatsAppButton>
+            <div className="flex flex-col items-center gap-2 text-muted-foreground text-center">
+              <span>⭐ +1.541% de crescimento em geração de leads</span>
+              <span>✨ Especializada em medicina premium</span>
+              <span>🏥 Primeira Atendimento IA especializada no setor de saúde de alto padrão no Brasil</span>
+            </div>
           </div>
 
-          {/* Logos dos Clientes - estilo Growth Machine */}
-          <div className="border-t pt-8">
-            <p className="text-sm text-muted-foreground mb-6 uppercase tracking-wider">CLÍNICAS QUE JÁ CONFIAM NA SCALIUM.AI</p>
-            <div className="flex items-center justify-center space-x-12 opacity-60">
-              <div className="text-lg font-semibold text-muted-foreground">Cirurgia Plástica SP</div>
-              <div className="text-lg font-semibold text-muted-foreground">Dermatologia RJ</div>
-              <div className="text-lg font-semibold text-muted-foreground">Implantodontia BH</div>
-              <div className="text-lg font-semibold text-muted-foreground">Estética PR</div>
-            </div>
+          <div className="mt-16 bg-card/10 backdrop-blur-sm rounded-lg p-6 max-w-4xl mx-auto border border-border">
+            <p className="text-lg leading-relaxed">
+              Se seu instituto médico ou clínica opera com pelo menos R$ 100K mensais,<br />
+              mas possui infraestrutura e expertise para patamares superiores, esta é<br />
+              uma oportunidade de integrar tecnologia pioneira que revoluciona o atendimento<br />
+              na medicina premium.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Soluções Section - estilo Growth Machine */}
-      <section id="solucoes" className="py-20 px-4 bg-muted/30">
+      {/* Results Section */}
+      <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <Badge variant="secondary" className="mb-4 text-sm px-4 py-2 bg-primary/10 text-primary border-primary/20">
-              • SOLUÇÕES
-            </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Como a SCALIUM.AI resolve seus problemas
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              Resultados de Clínicas e Institutos que Adotaram o Atendimento IA
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Automatize o atendimento, qualifique leads e agende mais consultas com tecnologia de ponta
-            </p>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
+
+          <div className="grid md:grid-cols-3 gap-8">
             {results.map((result, index) => (
-              <Card key={index} className="text-center p-8 bg-white border-0 shadow-lg hover:shadow-xl transition-shadow">
-                <CardContent className="p-0">
-                  <div className="text-5xl font-bold text-primary mb-4">{result.number}</div>
-                  <p className="text-muted-foreground text-lg">{result.label}</p>
-                </CardContent>
+              <Card key={index} className="text-center p-8 border-2 hover:border-primary transition-colors">
+                <div className="text-5xl font-bold text-primary mb-4">{result.number}</div>
+                <p className="text-lg text-muted-foreground">{result.description}</p>
               </Card>
             ))}
           </div>
-          
-          {/* CTA adicional */}
-          <div className="text-center">
-            <WhatsAppButton
-              message="Quero saber como funciona Scalium AI"
-              size="lg"
-              className="text-lg px-8 py-4 bg-primary hover:bg-primary/90"
+
+          <div className="mt-16 bg-card border-2 rounded-lg p-8 max-w-4xl mx-auto">
+            <blockquote className="text-xl italic mb-4 text-center">
+              "A SCALIUM.AI revolucionou nosso atendimento. É como ter uma atendente que nunca 
+              dorme, nunca tem dia ruim e entende perfeitamente nosso mercado médico. 
+              Os resultados superaram todas as expectativas em apenas 30 dias."
+            </blockquote>
+            <div className="text-center">
+              <div className="font-bold">Dr. Eduardo Martins, Diretor Comercial</div>
+              <div className="text-muted-foreground">Instituto de Cirurgia Plástica Avançada - São Paulo</div>
+              <div className="text-primary font-semibold mt-2">Resultado: +340% em leads qualificados</div>
+            </div>
+          </div>
+
+          <div className="text-center mt-8">
+            <Button 
+              onClick={() => setIsDialogOpen(true)}
+              size="lg" 
+              className="text-xl px-8 py-6"
             >
-              Teste nossa IA agora mesmo
-            </WhatsAppButton>
+              Quero Conhecer a IA SCALIUM
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Testimonial */}
-      <section className="py-16 px-4 bg-muted/50">
-        <div className="max-w-4xl mx-auto text-center">
-          <blockquote className="text-2xl italic text-foreground mb-4">
-            "Implementamos a SCALIUM.AI e tivemos +340% em leads qualificados em apenas 30 dias. 
-            A precisão no atendimento médico é impressionante."
-          </blockquote>
-          <cite className="text-lg text-primary font-semibold">— Dr. Eduardo Martins, Cirurgião Plástico</cite>
-        </div>
-      </section>
-
-      {/* Pillars */}
+      {/* Solutions Section */}
       <section className="py-20 px-4">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16">Diferenciais únicos para medicina premium</h2>
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {pillars.map((pillar, index) => (
-              <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
-                <CardContent className="p-0">
-                  <pillar.icon className="h-12 w-12 text-primary mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">{pillar.title}</h3>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          
-          {/* CTA adicional */}
-          <div className="text-center">
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  className="text-lg px-6 py-3"
-                  onClick={() => trackInteraction('click', 'pillars_cta', 'Quero uma demonstração personalizada')}
-                >
-                  Quero uma demonstração personalizada
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-md">
-                <LGPDForm onClose={() => {}} source="pillars_demo_button" />
-              </DialogContent>
-            </Dialog>
-          </div>
-        </div>
-      </section>
-
-      {/* Cases */}
-      <section id="cases" className="py-20 px-4 bg-background">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <Badge variant="secondary" className="mb-4 text-sm px-4 py-2 bg-primary/10 text-primary border-primary/20">
-              • CASES DE SUCESSO
-            </Badge>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              Resultados reais de clínicas reais
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              Conheça os Pilares que Tornam a SCALIUM.AI uma Máquina de Conversão
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Veja como a SCALIUM.AI transformou o atendimento dessas clínicas em máquinas de resultados
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
+              Nossa Atendimento IA foi desenvolvida especificamente para medicina premium, 
+              combinando frameworks de atendimento comprovados com conhecimento 
+              especializado do setor de saúde.
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-3 gap-8 mb-12">
-            {cases.map((case_, index) => (
-              <Card key={index} className="p-8 text-center bg-white border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {pillars.map((pillar, index) => (
+              <Card key={index} className="p-6 border-2 hover:border-primary transition-colors">
                 <CardContent className="p-0">
-                  <h3 className="text-xl font-semibold mb-6 text-foreground">{case_.title}</h3>
-                  <div className="flex justify-center items-center gap-6 mb-6">
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-muted-foreground mb-1">{case_.before}</div>
-                      <div className="text-sm text-muted-foreground">Antes</div>
-                    </div>
-                    <div className="text-primary text-2xl">→</div>
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-primary mb-1">{case_.after}</div>
-                      <div className="text-sm text-muted-foreground">Depois</div>
-                    </div>
-                  </div>
-                  <Badge className="bg-primary text-primary-foreground text-lg px-4 py-2">+{case_.growth}%</Badge>
+                  <h3 className="text-lg font-bold mb-2">{pillar.title}</h3>
+                  <h4 className="text-md text-primary mb-4">{pillar.subtitle}</h4>
+                  <p className="text-muted-foreground mb-4">{pillar.description}</p>
+                  <ul className="space-y-2">
+                    {pillar.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-sm">
+                        <span className="text-primary mt-1">•</span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </CardContent>
               </Card>
             ))}
           </div>
-          
-          {/* CTA adicional */}
-          <div className="text-center">
-            <WhatsAppButton
-              message="Quero saber como posso ter esses resultados na minha clínica"
-              size="lg"
-              className="text-lg px-8 py-4 bg-primary hover:bg-primary/90"
+
+          <div className="text-center mt-16">
+            <Button 
+              onClick={() => setIsDialogOpen(true)}
+              size="lg" 
+              className="text-xl px-8 py-6"
             >
-              Como posso ter esses resultados?
-            </WhatsAppButton>
+              Agendar Demonstração Personalizada
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="py-20 px-4 bg-gradient-to-r from-primary/5 to-accent/5">
+      {/* Timeline Section */}
+      <section className="py-20 px-4 bg-muted/30">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16">Como funciona em 4 etapas</h2>
-          <div className="grid md:grid-cols-4 gap-8 mb-12">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              Como o Atendimento IA SCALIUM Transforma Seu Atendimento
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
-              <h3 className="text-xl font-semibold mb-2">Configuração</h3>
-              <p className="text-muted-foreground">48h para integrar com seus sistemas e personalizar para sua especialidade</p>
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-white text-2xl">⚙️</span>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Configuração Especializada</h3>
+              <p className="text-muted-foreground">Configuramos a IA com seus dados, especialidade médica e perfil de paciente ideal em 48 horas.</p>
+              <div className="text-primary font-semibold mt-2">Setup médico personalizado</div>
             </div>
+
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
-              <h3 className="text-xl font-semibold mb-2">Definir ICP</h3>
-              <p className="text-muted-foreground">Configurar perfil ideal de paciente e abordagem especializada</p>
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-white text-2xl">🎯</span>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Definição de ICP Médico</h3>
+              <p className="text-muted-foreground">Mapeamos seu Cliente Ideal (ICP) considerando especialidade, faixa etária e poder aquisitivo.</p>
+              <div className="text-primary font-semibold mt-2">Segmentação inteligente</div>
             </div>
+
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
-              <h3 className="text-xl font-semibold mb-2">Ativação 24/7</h3>
-              <p className="text-muted-foreground">IA entra em funcionamento atendendo leads e agendando consultas</p>
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-white text-2xl">🚀</span>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Ativação do Atendimento IA</h3>
+              <p className="text-muted-foreground">Atendimento IA inicia resposta automatizada 24/7 para todos os leads que chegam pelos seus canais.</p>
+              <div className="text-primary font-semibold mt-2">Operação contínua</div>
             </div>
+
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">4</div>
-              <h3 className="text-xl font-semibold mb-2">Otimização</h3>
-              <p className="text-muted-foreground">Monitoramento e ajustes contínuos baseados em métricas</p>
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                <span className="text-white text-2xl">📊</span>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Resultados e Otimização</h3>
+              <p className="text-muted-foreground">Acompanhe métricas em tempo real e receba agendamentos qualificados direto na agenda.</p>
+              <div className="text-primary font-semibold mt-2">Conversão garantida</div>
             </div>
           </div>
-          
-          {/* CTA adicional */}
-          <div className="text-center">
-            <WhatsAppButton
-              message="Quero começar a implementação hoje mesmo!"
-              size="lg"
-              className="text-lg px-6 py-3"
+
+          <div className="text-center mt-16">
+            <Button 
+              onClick={() => setIsDialogOpen(true)}
+              size="lg" 
+              className="text-xl px-8 py-6"
             >
-              Quero começar hoje mesmo!
-            </WhatsAppButton>
+              Começar Minha Implementação Agora
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Integrations */}
+      {/* Differentials Section */}
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16">Integra com seus sistemas atuais</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <Card className="p-6 text-center">
-              <CardContent className="p-0">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <Shield className="h-6 w-6 text-primary" />
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              Por Que a SCALIUM.AI é Pioneira no Mercado de Saúde?
+            </h2>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-6">
+              <h3 className="text-2xl font-bold mb-8">Somos os PRIMEIROS a desenvolver um Atendimento IA especificamente para medicina premium, com conhecimento setorial profundo e compliance médico integrado.</h3>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center mt-1">
+                    <span className="text-white text-sm">✓</span>
+                  </div>
+                  <span className="text-lg">Especialização exclusiva em medicina premium</span>
                 </div>
-                <h3 className="font-semibold">CRMs</h3>
-                <p className="text-sm text-muted-foreground">HubSpot, Salesforce, Pipedrive, RD Station</p>
-              </CardContent>
-            </Card>
-            <Card className="p-6 text-center">
-              <CardContent className="p-0">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <Clock className="h-6 w-6 text-primary" />
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center mt-1">
+                    <span className="text-white text-sm">✓</span>
+                  </div>
+                  <span className="text-lg">Compliance automático com normas do CFM</span>
                 </div>
-                <h3 className="font-semibold">Agenda</h3>
-                <p className="text-sm text-muted-foreground">Google Calendar, sistemas médicos</p>
-              </CardContent>
-            </Card>
-            <Card className="p-6 text-center">
-              <CardContent className="p-0">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <Zap className="h-6 w-6 text-primary" />
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center mt-1">
+                    <span className="text-white text-sm">✓</span>
+                  </div>
+                  <span className="text-lg">Linguagem médica adequada por especialidade</span>
                 </div>
-                <h3 className="font-semibold">WhatsApp</h3>
-                <p className="text-sm text-muted-foreground">Business API, templates aprovados</p>
-              </CardContent>
-            </Card>
-            <Card className="p-6 text-center">
-              <CardContent className="p-0">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
-                  <TrendingUp className="h-6 w-6 text-primary" />
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center mt-1">
+                    <span className="text-white text-sm">✓</span>
+                  </div>
+                  <span className="text-lg">Abordagem respeitosa para pacientes sensíveis</span>
                 </div>
-                <h3 className="font-semibold">Analytics</h3>
-                <p className="text-sm text-muted-foreground">Métricas de conversão e ROI</p>
-              </CardContent>
-            </Card>
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center mt-1">
+                    <span className="text-white text-sm">✓</span>
+                  </div>
+                  <span className="text-lg">Integração com sistemas de gestão médica</span>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center mt-1">
+                    <span className="text-white text-sm">✓</span>
+                  </div>
+                  <span className="text-lg">Conhecimento de sazonalidades do setor</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-card p-8 rounded-xl border-2">
+              <h4 className="text-xl font-bold mb-6">SCALIUM.AI vs ATENDIMENTO GENÉRICO</h4>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center py-2 border-b">
+                  <span>Especialização:</span>
+                  <span className="font-semibold text-primary">Medicina vs Geral</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b">
+                  <span>Compliance:</span>
+                  <span className="font-semibold text-primary">Médico vs Básico</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b">
+                  <span>Linguagem:</span>
+                  <span className="font-semibold text-primary">Setorial vs Genérica</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b">
+                  <span>Abordagem:</span>
+                  <span className="font-semibold text-primary">Empática vs Comercial</span>
+                </div>
+                <div className="flex justify-between items-center py-2 border-b">
+                  <span>Conhecimento:</span>
+                  <span className="font-semibold text-primary">Profundo vs Superficial</span>
+                </div>
+                <div className="flex justify-between items-center py-2">
+                  <span>Resultados:</span>
+                  <span className="font-semibold text-primary">Comprovados vs Estimados</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Guarantees */}
-      <section className="py-20 px-4 bg-muted/30">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16">Garantias que você pode confiar</h2>
-          <div className="space-y-4">
-            {guarantees.map((guarantee, index) => (
-              <div key={index} className="flex items-center gap-4 p-4 bg-white rounded-lg shadow-sm">
-                <CheckCircle className="h-6 w-6 text-primary flex-shrink-0" />
-                <span className="text-lg">{guarantee}</span>
-              </div>
+      {/* Case Studies Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              De 12 para 47 Agendamentos: Institutos que Multiplicaram Resultados com Nossa Atendimento IA
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {cases.map((case_, index) => (
+              <Card key={index} className="p-8 border-2 hover:border-primary transition-colors">
+                <CardContent className="p-0">
+                  <h3 className="text-xl font-bold mb-2">{case_.company}</h3>
+                  <div className="text-primary font-semibold mb-2">{case_.name}</div>
+                  <div className="text-muted-foreground mb-4">Especialidade: {case_.industry}</div>
+                  
+                  <div className="space-y-2 mb-4">
+                    <div><strong>ANTES:</strong> {case_.before}</div>
+                    <div><strong>DEPOIS:</strong> {case_.after}</div>
+                  </div>
+                  
+                  <blockquote className="italic text-muted-foreground">
+                    "{case_.testimonial}"
+                  </blockquote>
+                </CardContent>
+              </Card>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Final CTA - estilo Growth Machine */}
-      <section className="py-32 px-4 bg-primary text-primary-foreground text-center relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_35%,rgba(255,255,255,.1)_50%,transparent_65%)] bg-[length:30px_30px] opacity-10"></div>
-        
-        <div className="max-w-4xl mx-auto relative z-10">
-          <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
-            Pronto para transformar<br />
-            <span className="text-primary-foreground/90">seu atendimento?</span>
-          </h2>
-          <p className="text-xl md:text-2xl mb-12 text-primary-foreground/80 max-w-2xl mx-auto">
-            Junte-se às clínicas que já multiplicaram seus resultados com a SCALIUM.AI
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Dialog>
-              <DialogTrigger asChild>
-                <Button 
-                  size="lg" 
-                  variant="secondary" 
-                  className="text-xl px-10 py-5 bg-white text-primary hover:bg-white/90"
-                  onClick={() => trackInteraction('click', 'final_cta_demo', 'DIAGNÓSTICO GRATUITO')}
-                >
-                  DIAGNÓSTICO GRATUITO →
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-md">
-                <LGPDForm onClose={() => {}} source="final_cta_demo_button" />
-              </DialogContent>
-            </Dialog>
-            <WhatsAppButton
-              message="*Quero saber como você consegue levar minha clínica para o próximo nivel*"
-              variant="outline"
-              size="lg"
-              className="text-xl px-10 py-5 border-2 border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors"
+          <div className="text-center mt-16">
+            <Button 
+              onClick={() => setIsDialogOpen(true)}
+              size="lg" 
+              className="text-xl px-8 py-6"
             >
-              FALAR COM CONSULTOR
-            </WhatsAppButton>
+              Quero Resultados Como Estes
+            </Button>
           </div>
         </div>
       </section>
 
-      {/* Social Media Section */}
-      <section className="py-16 px-4 bg-gradient-to-r from-primary/10 to-accent/10">
+      {/* Integrations Section */}
+      <section className="py-20 px-4 bg-muted/30">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              Integração Simples com Seus Sistemas de CRM Atuais
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+            <div className="text-center p-6 bg-card rounded-lg border-2 hover:border-primary transition-colors">
+              <div className="text-4xl mb-4">🔗</div>
+              <h3 className="font-bold mb-2">HubSpot</h3>
+              <p className="text-sm text-muted-foreground">Sincronização completa de leads, histórico e pipeline de vendas</p>
+            </div>
+            
+            <div className="text-center p-6 bg-card rounded-lg border-2 hover:border-primary transition-colors">
+              <div className="text-4xl mb-4">🔗</div>
+              <h3 className="font-bold mb-2">Salesforce</h3>
+              <p className="text-sm text-muted-foreground">Integração nativa com maior CRM médico do mercado</p>
+            </div>
+            
+            <div className="text-center p-6 bg-card rounded-lg border-2 hover:border-primary transition-colors">
+              <div className="text-4xl mb-4">🔗</div>
+              <h3 className="font-bold mb-2">Pipedrive</h3>
+              <p className="text-sm text-muted-foreground">Conexão direta com funil de vendas simplificado</p>
+            </div>
+            
+            <div className="text-center p-6 bg-card rounded-lg border-2 hover:border-primary transition-colors">
+              <div className="text-4xl mb-4">🔗</div>
+              <h3 className="font-bold mb-2">RD Station</h3>
+              <p className="text-sm text-muted-foreground">Automação de marketing integrada com Atendimento IA</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="text-center p-6 bg-card rounded-lg border-2 hover:border-primary transition-colors">
+              <div className="text-4xl mb-4">🏥</div>
+              <h3 className="font-bold mb-2">Prontuário Eletrônico</h3>
+              <p className="text-sm text-muted-foreground">Integração com principais sistemas de gestão médica</p>
+            </div>
+            
+            <div className="text-center p-6 bg-card rounded-lg border-2 hover:border-primary transition-colors">
+              <div className="text-4xl mb-4">📅</div>
+              <h3 className="font-bold mb-2">Agendamento Online</h3>
+              <p className="text-sm text-muted-foreground">Conexão com calendários e sistemas de consultas</p>
+            </div>
+            
+            <div className="text-center p-6 bg-card rounded-lg border-2 hover:border-primary transition-colors">
+              <div className="text-4xl mb-4">💬</div>
+              <h3 className="font-bold mb-2">WhatsApp Business</h3>
+              <p className="text-sm text-muted-foreground">Integração com atendimento via WhatsApp institucional</p>
+            </div>
+            
+            <div className="text-center p-6 bg-card rounded-lg border-2 hover:border-primary transition-colors">
+              <div className="text-4xl mb-4">📊</div>
+              <h3 className="font-bold mb-2">Analytics Médicos</h3>
+              <p className="text-sm text-muted-foreground">Relatórios específicos para métricas de saúde</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Guarantees Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              Garantias e Suporte Especializado em Medicina
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            <div>
+              <h3 className="text-2xl font-bold mb-6">GARANTIAS OFERECIDAS:</h3>
+              <div className="space-y-4">
+                {guarantees.map((guarantee, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center mt-1">
+                      <span className="text-white text-sm">✓</span>
+                    </div>
+                    <span className="text-lg">{guarantee}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="bg-primary/10 p-8 rounded-xl border-2 border-primary">
+              <h3 className="text-2xl font-bold mb-6">SUPORTE ESPECIALIZADO:</h3>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">🏥</span>
+                  <div>
+                    <h4 className="font-bold">Equipe com conhecimento médico</h4>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">📞</span>
+                  <div>
+                    <h4 className="font-bold">Suporte técnico 24/7 especializado</h4>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">🎓</span>
+                  <div>
+                    <h4 className="font-bold">Treinamentos mensais da equipe</h4>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">📊</span>
+                  <div>
+                    <h4 className="font-bold">Consultoria estratégica incluída</h4>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">🔄</span>
+                  <div>
+                    <h4 className="font-bold">Otimizações contínuas gratuitas</h4>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <span className="text-2xl">📈</span>
+                  <div>
+                    <h4 className="font-bold">Relatórios médicos personalizados</h4>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="py-20 px-4 bg-gradient-to-r from-primary/20 to-primary/10">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="flex justify-center mb-8">
-            <img 
-              src="/lovable-uploads/3c84c696-bd8e-474e-9329-a64d865861ba.png" 
-              alt="SCALIUM AI - IA PARA ESCALAR" 
-              className="h-16 w-auto"
-            />
-          </div>
-          <h2 className="text-3xl font-bold text-foreground mb-8">Conecte-se conosco</h2>
-          <div className="flex justify-center gap-6">
-            <a
-              href="https://instagram.com/scalium_ai"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 px-6 py-3 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow group"
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            Pronto Para Transformar Seu Atendimento em uma Máquina de Agendamentos?
+          </h2>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+            <Button 
+              onClick={() => setIsDialogOpen(true)}
+              size="lg" 
+              className="text-xl px-10 py-6 bg-primary hover:bg-primary/90 text-white font-semibold shadow-lg"
             >
-              <Instagram className="h-6 w-6 text-pink-500 group-hover:scale-110 transition-transform" />
-              <span className="font-semibold text-foreground">@scalium_ai</span>
-            </a>
-            <a
-              href="https://linkedin.com/in/maykelmarques"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 px-6 py-3 bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow group"
-            >
-              <Linkedin className="h-6 w-6 text-blue-600 group-hover:scale-110 transition-transform" />
-              <span className="font-semibold text-foreground">@maykelmarques</span>
-            </a>
+              AGENDAR DEMO GRATUITA
+            </Button>
           </div>
+
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogContent className="max-w-md">
+              <LGPDForm onClose={() => setIsDialogOpen(false)} source="hero_button" />
+            </DialogContent>
+          </Dialog>
+          <WhatsAppButton
+            message="*Quero saber como você consegue levar minha clínica para o próximo nivel*"
+            variant="outline"
+            size="lg"
+            className="text-xl px-10 py-5 border-2 border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors"
+          >
+            Falar com Consultor
+          </WhatsAppButton>
+
+          <p className="text-muted-foreground mt-8">
+            Especialistas em medicina premium • Compliance CFM • Resultados garantidos
+          </p>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-4 bg-muted/50">
+      <footer className="py-12 px-4 bg-background border-t">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
+          <div className="grid md:grid-cols-3 gap-8">
             <div>
-              <h3 className="font-semibold mb-4">Endereços</h3>
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <p>R.: Nuporanga, 97 – Vl Mariana<br />São Paulo, SP</p>
-                <p>R.: Dr. Miguel Zacarias 56 Vl Progresso<br />Maringá - PR</p>
+              <img 
+                src="/lovable-uploads/3c84c696-bd8e-474e-9329-a64d865861ba.png" 
+                alt="SCALIUM AI" 
+                className="h-8 w-auto mb-4"
+              />
+              <p className="text-muted-foreground">
+                A primeira IA de atendimento desenvolvida exclusivamente para medicina premium.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="font-bold mb-4">Contato</h4>
+              <div className="space-y-2 text-muted-foreground">
+                <p>📧 contato@scalium.ai</p>
+                <p>📱 (22) 5192-6333</p>
               </div>
             </div>
+            
             <div>
-              <h3 className="font-semibold mb-4">Contatos</h3>
-              <div className="space-y-2 text-sm text-muted-foreground">
-                <p>São Paulo: (11) 5192-6333</p>
-                <p>Maringá: (44) 3346-8779</p>
+              <h4 className="font-bold mb-4">Siga-nos</h4>
+              <div className="flex gap-4">
+                <a href="#" className="text-muted-foreground hover:text-primary">
+                  <Instagram className="h-6 w-6" />
+                </a>
+                <a href="#" className="text-muted-foreground hover:text-primary">
+                  <Linkedin className="h-6 w-6" />
+                </a>
               </div>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-4">Teste agora</h3>
-              <WhatsAppButton
-                message="Quero saber como funciona Scalium AI"
-                variant="secondary"
-                className="w-full"
-              >
-                Fale com nossa IA
-              </WhatsAppButton>
             </div>
           </div>
           
-          <div className="text-center pt-8 border-t">
-            <p className="text-sm text-muted-foreground">
-              Conforme normas do CFM e ANVISA. Esta IA não realiza diagnóstico médico.
-            </p>
+          <div className="border-t mt-8 pt-8 text-center text-muted-foreground">
+            <p>&copy; 2024 SCALIUM.AI. Todos os direitos reservados.</p>
           </div>
         </div>
       </footer>
