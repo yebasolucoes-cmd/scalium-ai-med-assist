@@ -409,10 +409,10 @@ const Index = () => {
               </DialogContent>
             </Dialog>
             <WhatsAppButton
-              message="Quero saber como funciona Scalium AI"
+              message="*Quero saber como você consegue levar minha clínica para o próximo nivel*"
               variant="outline"
               size="lg"
-              className="text-xl px-10 py-5 border-2 border-white text-white hover:bg-white hover:text-primary"
+              className="text-xl px-10 py-5 border-2 border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors"
             >
               FALAR COM CONSULTOR
             </WhatsAppButton>

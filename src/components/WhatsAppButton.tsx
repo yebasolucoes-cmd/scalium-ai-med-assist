@@ -22,7 +22,7 @@ const WhatsAppButton = ({
   const handleClick = () => {
     trackInteraction('whatsapp_click', 'whatsapp_button', children?.toString());
     const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/551151926333?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/552251926333?text=${encodedMessage}`, '_blank');
   };
 
   return (
