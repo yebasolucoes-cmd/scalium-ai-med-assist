@@ -7,111 +7,89 @@ import { CheckCircle, Star, TrendingUp, Clock, Shield, Zap, Instagram, Linkedin 
 import LGPDForm from "@/components/LGPDForm";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useTracking } from "@/hooks/useTracking";
-
 const Index = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const { trackInteraction } = useTracking();
-
+  const {
+    trackInteraction
+  } = useTracking();
   useEffect(() => {
     trackInteraction('page_view', 'home_page');
-    
+
     // Gerar session ID se não existir
     if (!sessionStorage.getItem('session_id')) {
       sessionStorage.setItem('session_id', crypto.randomUUID());
     }
   }, [trackInteraction]);
-
-  const results = [
-    { number: "+1.541%", description: "Crescimento médio em geração de leads desde a primeira ativação" },
-    { number: "24/7", description: "Atendimento consultivo sem custo de equipe adicional" },
-    { number: "73%", description: "Taxa média de conversão em agendamentos qualificados" }
-  ];
-
-  const pillars = [
-    {
-      title: "Cadência Automatizada e Inteligente",
-      subtitle: "⏰ Timing Estratégico Perfeito",
-      description: "Segue cadência estruturada com espaçamento estratégico entre abordagens, garantindo contato no momento ideal.",
-      features: ["Sequências personalizadas por perfil de lead", "Horários otimizados para medicina premium", "Frequência adaptada ao comportamento do prospect", "Follow-ups inteligentes baseados em interações"]
-    },
-    {
-      title: "Integração com os Principais CRMs",
-      subtitle: "🔗 Conectividade Total",
-      description: "Compatível com diversos sistemas, conecta informações coletadas ao seu funil em tempo real, sem retrabalho.",
-      features: ["Integração nativa com HubSpot, Salesforce, Pipedrive", "Sincronização automática de dados de contato", "Relatórios em tempo real no seu CRM", "Histórico completo de interações preservado"]
-    },
-    {
-      title: "Memória Infinita e Evolução Constante",
-      subtitle: "🧠 Aprendizado Contínuo",
-      description: "Aprende com respostas dos leads, ajusta discurso, refina argumentos e aumenta conversão de forma autônoma.",
-      features: ["Machine learning especializado em medicina", "Otimização automática de abordagens", "Identificação de padrões de objeções", "Melhoria contínua da taxa de conversão"]
-    },
-    {
-      title: "Prompts Adaptados para Medicina Premium",
-      subtitle: "🎯 Especialização Setorial",
-      description: "Construímos prompts 100% alinhados ao mercado médico, com ajustes baseados no seu posicionamento real.",
-      features: ["Linguagem médica adequada por especialidade", "Abordagem respeitosa para pacientes premium", "Compliance com normas do CFM e ANVISA", "Personalização por tipo de procedimento"]
-    },
-    {
-      title: "Abordagem Sob Medida para Cada Lead",
-      subtitle: "📋 Frameworks de Atendimento Médico",
-      description: "Utiliza SPIN Selling, GPCT e RDO adaptados para medicina, interpretando respostas e quebrando objeções estrategicamente.",
-      features: ["Qualificação médica especializada (BANT adaptado)", "Descoberta de necessidades específicas de saúde", "Quebra de objeções comuns em medicina premium", "Condução natural para agendamento de consultas"]
-    },
-    {
-      title: "Conversas Naturais Sem Traços Robóticos",
-      subtitle: "🗣️ Experiência Humana Premium",
-      description: "Voz feminina profissional, linguagem empática e condução fluida que transmite confiança e segurança.",
-      features: ["Tom respeitoso adequado para medicina", "Empatia programada para situações sensíveis", "Linguagem clara e acessível para pacientes", "Personalidade que representa bem sua clínica"]
-    }
-  ];
-
-  const cases = [
-    {
-      company: "Instituto de Cirurgia Plástica",
-      industry: "Cirurgia Estética",
-      name: "Dr. Eduardo Martins - São Paulo",
-      before: "12 agendamentos/mês",
-      after: "47 agendamentos/mês (+292%)",
-      testimonial: "Transformou completamente nosso atendimento."
-    },
-    {
-      company: "Centro de Dermatologia Avançada",
-      industry: "Dermatologia Estética", 
-      name: "Dra. Patricia Santos - Rio de Janeiro",
-      before: "18 consultas/mês",
-      after: "73 consultas/mês (+306%)",
-      testimonial: "Nunca imaginei que IA pudesse entender medicina assim."
-    },
-    {
-      company: "Clínica Odontológica Premium",
-      industry: "Implantodontia",
-      name: "Dr. Ricardo Campos - Belo Horizonte",
-      before: "8 tratamentos/mês",
-      after: "34 tratamentos/mês (+325%)",
-      testimonial: "ROI foi recuperado na primeira semana."
-    }
-  ];
-
-  const guarantees = [
-    "+200% em agendamentos em 30 dias ou dinheiro de volta",
-    "Compliance total com normas médicas",
-    "Integração garantida com seu CRM",
-    "Atualizações contínuas incluídas",
-    "Treinamento completo da equipe"
-  ];
-
-  return (
-    <div className="min-h-screen">
+  const results = [{
+    number: "+1.541%",
+    description: "Crescimento médio em geração de leads desde a primeira ativação"
+  }, {
+    number: "24/7",
+    description: "Atendimento consultivo sem custo de equipe adicional"
+  }, {
+    number: "73%",
+    description: "Taxa média de conversão em agendamentos qualificados"
+  }];
+  const pillars = [{
+    title: "Cadência Automatizada e Inteligente",
+    subtitle: "⏰ Timing Estratégico Perfeito",
+    description: "Segue cadência estruturada com espaçamento estratégico entre abordagens, garantindo contato no momento ideal.",
+    features: ["Sequências personalizadas por perfil de lead", "Horários otimizados para medicina premium", "Frequência adaptada ao comportamento do prospect", "Follow-ups inteligentes baseados em interações"]
+  }, {
+    title: "Integração com os Principais CRMs",
+    subtitle: "🔗 Conectividade Total",
+    description: "Compatível com diversos sistemas, conecta informações coletadas ao seu funil em tempo real, sem retrabalho.",
+    features: ["Integração nativa com HubSpot, Salesforce, Pipedrive", "Sincronização automática de dados de contato", "Relatórios em tempo real no seu CRM", "Histórico completo de interações preservado"]
+  }, {
+    title: "Memória Infinita e Evolução Constante",
+    subtitle: "🧠 Aprendizado Contínuo",
+    description: "Aprende com respostas dos leads, ajusta discurso, refina argumentos e aumenta conversão de forma autônoma.",
+    features: ["Machine learning especializado em medicina", "Otimização automática de abordagens", "Identificação de padrões de objeções", "Melhoria contínua da taxa de conversão"]
+  }, {
+    title: "Prompts Adaptados para Medicina Premium",
+    subtitle: "🎯 Especialização Setorial",
+    description: "Construímos prompts 100% alinhados ao mercado médico, com ajustes baseados no seu posicionamento real.",
+    features: ["Linguagem médica adequada por especialidade", "Abordagem respeitosa para pacientes premium", "Compliance com normas do CFM e ANVISA", "Personalização por tipo de procedimento"]
+  }, {
+    title: "Abordagem Sob Medida para Cada Lead",
+    subtitle: "📋 Frameworks de Atendimento Médico",
+    description: "Utiliza SPIN Selling, GPCT e RDO adaptados para medicina, interpretando respostas e quebrando objeções estrategicamente.",
+    features: ["Qualificação médica especializada (BANT adaptado)", "Descoberta de necessidades específicas de saúde", "Quebra de objeções comuns em medicina premium", "Condução natural para agendamento de consultas"]
+  }, {
+    title: "Conversas Naturais Sem Traços Robóticos",
+    subtitle: "🗣️ Experiência Humana Premium",
+    description: "Voz feminina profissional, linguagem empática e condução fluida que transmite confiança e segurança.",
+    features: ["Tom respeitoso adequado para medicina", "Empatia programada para situações sensíveis", "Linguagem clara e acessível para pacientes", "Personalidade que representa bem sua clínica"]
+  }];
+  const cases = [{
+    company: "Instituto de Cirurgia Plástica",
+    industry: "Cirurgia Estética",
+    name: "Dr. Eduardo Martins - São Paulo",
+    before: "12 agendamentos/mês",
+    after: "47 agendamentos/mês (+292%)",
+    testimonial: "Transformou completamente nosso atendimento."
+  }, {
+    company: "Centro de Dermatologia Avançada",
+    industry: "Dermatologia Estética",
+    name: "Dra. Patricia Santos - Rio de Janeiro",
+    before: "18 consultas/mês",
+    after: "73 consultas/mês (+306%)",
+    testimonial: "Nunca imaginei que IA pudesse entender medicina assim."
+  }, {
+    company: "Clínica Odontológica Premium",
+    industry: "Implantodontia",
+    name: "Dr. Ricardo Campos - Belo Horizonte",
+    before: "8 tratamentos/mês",
+    after: "34 tratamentos/mês (+325%)",
+    testimonial: "ROI foi recuperado na primeira semana."
+  }];
+  const guarantees = ["+200% em agendamentos em 30 dias ou dinheiro de volta", "Compliance total com normas médicas", "Integração garantida com seu CRM", "Atualizações contínuas incluídas", "Treinamento completo da equipe"];
+  return <div className="min-h-screen">
       {/* Header Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center">
-            <img 
-              src="/lovable-uploads/3c84c696-bd8e-474e-9329-a64d865861ba.png" 
-              alt="SCALIUM AI" 
-              className="h-8 w-auto"
-            />
+            <img src="/lovable-uploads/3c84c696-bd8e-474e-9329-a64d865861ba.png" alt="SCALIUM AI" className="h-8 w-auto" />
           </div>
           <nav className="hidden md:flex items-center space-x-8">
             <a href="#solucoes" className="text-foreground hover:text-primary transition-colors">SOLUÇÕES</a>
@@ -120,10 +98,7 @@ const Index = () => {
           </nav>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
-              <Button 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-2"
-                onClick={() => trackInteraction('click', 'header_cta', 'Agendar Demo da IA em Funcionamento')}
-              >
+              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-2" onClick={() => trackInteraction('click', 'header_cta', 'Agendar Demo da IA em Funcionamento')}>
                 Agendar Demo da IA em Funcionamento
               </Button>
             </DialogTrigger>
@@ -154,11 +129,7 @@ const Index = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Button 
-              onClick={() => setIsDialogOpen(true)}
-              size="lg" 
-              className="text-xl px-8 py-6 bg-primary hover:bg-primary/90 text-white font-semibold shadow-lg"
-            >
+            <Button onClick={() => setIsDialogOpen(true)} size="lg" className="text-xl px-8 py-6 bg-primary hover:bg-primary/90 text-white font-semibold shadow-lg">
               Agendar Demo da IA em Funcionamento
             </Button>
             
@@ -190,12 +161,10 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {results.map((result, index) => (
-              <Card key={index} className="text-center p-8 border-2 hover:border-primary transition-colors">
+            {results.map((result, index) => <Card key={index} className="text-center p-8 border-2 hover:border-primary transition-colors">
                 <div className="text-5xl font-bold text-primary mb-4">{result.number}</div>
                 <p className="text-lg text-muted-foreground">{result.description}</p>
-              </Card>
-            ))}
+              </Card>)}
           </div>
 
           <div className="mt-16 bg-card border-2 rounded-lg p-8 max-w-4xl mx-auto">
@@ -212,11 +181,7 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-8">
-            <Button 
-              onClick={() => setIsDialogOpen(true)}
-              size="lg" 
-              className="text-xl px-8 py-6"
-            >
+            <Button onClick={() => setIsDialogOpen(true)} size="lg" className="text-xl px-8 py-6">
               Quero Conhecer a IA SCALIUM
             </Button>
           </div>
@@ -238,31 +203,23 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {pillars.map((pillar, index) => (
-              <Card key={index} className="p-6 border-2 hover:border-primary transition-colors">
+            {pillars.map((pillar, index) => <Card key={index} className="p-6 border-2 hover:border-primary transition-colors">
                 <CardContent className="p-0">
                   <h3 className="text-lg font-bold mb-2">{pillar.title}</h3>
                   <h4 className="text-md text-primary mb-4">{pillar.subtitle}</h4>
                   <p className="text-muted-foreground mb-4">{pillar.description}</p>
                   <ul className="space-y-2">
-                    {pillar.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-sm">
+                    {pillar.features.map((feature, idx) => <li key={idx} className="flex items-start gap-2 text-sm">
                         <span className="text-primary mt-1">•</span>
                         <span>{feature}</span>
-                      </li>
-                    ))}
+                      </li>)}
                   </ul>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
 
           <div className="text-center mt-16">
-            <Button 
-              onClick={() => setIsDialogOpen(true)}
-              size="lg" 
-              className="text-xl px-8 py-6"
-            >
+            <Button onClick={() => setIsDialogOpen(true)} size="lg" className="text-xl px-8 py-6">
               Agendar Demonstração Personalizada
             </Button>
           </div>
@@ -317,11 +274,7 @@ const Index = () => {
           </div>
 
           <div className="text-center mt-16">
-            <Button 
-              onClick={() => setIsDialogOpen(true)}
-              size="lg" 
-              className="text-xl px-8 py-6"
-            >
+            <Button onClick={() => setIsDialogOpen(true)} size="lg" className="text-xl px-8 py-6">
               Começar Minha Implementação Agora
             </Button>
           </div>
@@ -423,8 +376,7 @@ const Index = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {cases.map((case_, index) => (
-              <Card key={index} className="p-8 border-2 hover:border-primary transition-colors">
+            {cases.map((case_, index) => <Card key={index} className="p-8 border-2 hover:border-primary transition-colors">
                 <CardContent className="p-0">
                   <h3 className="text-xl font-bold mb-2">{case_.company}</h3>
                   <div className="text-primary font-semibold mb-2">{case_.name}</div>
@@ -439,16 +391,11 @@ const Index = () => {
                     "{case_.testimonial}"
                   </blockquote>
                 </CardContent>
-              </Card>
-            ))}
+              </Card>)}
           </div>
 
           <div className="text-center mt-16">
-            <Button 
-              onClick={() => setIsDialogOpen(true)}
-              size="lg" 
-              className="text-xl px-8 py-6"
-            >
+            <Button onClick={() => setIsDialogOpen(true)} size="lg" className="text-xl px-8 py-6">
               Quero Resultados Como Estes
             </Button>
           </div>
@@ -531,14 +478,12 @@ const Index = () => {
             <div>
               <h3 className="text-2xl font-bold mb-6">GARANTIAS OFERECIDAS:</h3>
               <div className="space-y-4">
-                {guarantees.map((guarantee, index) => (
-                  <div key={index} className="flex items-start gap-3">
+                {guarantees.map((guarantee, index) => <div key={index} className="flex items-start gap-3">
                     <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center mt-1">
                       <span className="text-white text-sm">✓</span>
                     </div>
                     <span className="text-lg">{guarantee}</span>
-                  </div>
-                ))}
+                  </div>)}
               </div>
             </div>
 
@@ -595,11 +540,7 @@ const Index = () => {
           </h2>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
-            <Button 
-              onClick={() => setIsDialogOpen(true)}
-              size="lg" 
-              className="text-xl px-10 py-6 bg-primary hover:bg-primary/90 text-white font-semibold shadow-lg"
-            >
+            <Button onClick={() => setIsDialogOpen(true)} size="lg" className="text-xl px-10 py-6 bg-primary hover:bg-primary/90 text-white font-semibold shadow-lg">
               AGENDAR DEMO GRATUITA
             </Button>
           </div>
@@ -609,12 +550,7 @@ const Index = () => {
               <LGPDForm onClose={() => setIsDialogOpen(false)} source="hero_button" />
             </DialogContent>
           </Dialog>
-          <WhatsAppButton
-            message="*Quero saber como você consegue levar minha clínica para o próximo nivel*"
-            variant="outline"
-            size="lg"
-            className="text-xl px-10 py-5 border-2 border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors"
-          >
+          <WhatsAppButton message="*Quero saber como você consegue levar minha clínica para o próximo nivel*" variant="outline" size="lg" className="text-xl px-10 py-5 border-2 border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors">
             Falar com Consultor
           </WhatsAppButton>
 
@@ -629,11 +565,7 @@ const Index = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
             <div>
-              <img 
-                src="/lovable-uploads/3c84c696-bd8e-474e-9329-a64d865861ba.png" 
-                alt="SCALIUM AI" 
-                className="h-8 w-auto mb-4"
-              />
+              <img src="/lovable-uploads/3c84c696-bd8e-474e-9329-a64d865861ba.png" alt="SCALIUM AI" className="h-8 w-auto mb-4" />
               <p className="text-muted-foreground">
                 A primeira IA de atendimento desenvolvida exclusivamente para medicina premium.
               </p>
@@ -642,8 +574,8 @@ const Index = () => {
             <div>
               <h4 className="font-bold mb-4">Contato</h4>
               <div className="space-y-2 text-muted-foreground">
-                <p>📧 contato@scalium.ai</p>
-                <p>📱 (22) 5192-6333</p>
+                <p>📧 contato@scaliumai.com.br</p>
+                <p>📱 (11) 5192-6333</p>
               </div>
             </div>
             
@@ -665,8 +597,6 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
