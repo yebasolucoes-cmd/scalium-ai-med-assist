@@ -8,6 +8,17 @@ import LGPDForm from "@/components/LGPDForm";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useTracking } from "@/hooks/useTracking";
 
+// Import custom icons
+import alvoIcon from "@/assets/alvo-icon.png";
+import cerebroIcon from "@/assets/cerebro-icon.png";
+import tickIcon from "@/assets/tick-icon.png";
+import fogueteIcon from "@/assets/foguete-icon.png";
+import graficoIcon from "@/assets/grafico-icon.png";
+import linkIcon from "@/assets/link-icon.png";
+import engrenagemIcon from "@/assets/engrenagem-icon.png";
+import relogioIcon from "@/assets/relogio-icon.png";
+import tarefaIcon from "@/assets/tarefa-icon.png";
+
 const Index = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { trackInteraction } = useTracking();
@@ -44,7 +55,8 @@ const Index = () => {
   const pillars = [
     {
       title: "Cadência Automatizada e Inteligente",
-      subtitle: "⏰ Timing Estratégico Perfeito",
+      subtitle: "Timing Estratégico Perfeito",
+      icon: relogioIcon,
       description: "Segue cadência estruturada com espaçamento estratégico entre abordagens, garantindo contato no momento ideal.",
       features: [
         "Sequências personalizadas por perfil de lead",
@@ -54,8 +66,9 @@ const Index = () => {
       ]
     },
     {
-      title: "Integração com os Principais CRMs",
-      subtitle: "🔗 Conectividade Total",
+      title: "Integração com os Principais CRMs", 
+      subtitle: "Conectividade Total",
+      icon: linkIcon,
       description: "Compatível com diversos sistemas, conecta informações coletadas ao seu funil em tempo real, sem retrabalho.",
       features: [
         "Integração nativa com HubSpot, Salesforce, Pipedrive",
@@ -66,7 +79,8 @@ const Index = () => {
     },
     {
       title: "Memória Infinita e Evolução Constante",
-      subtitle: "🧠 Aprendizado Contínuo", 
+      subtitle: "Aprendizado Contínuo",
+      icon: cerebroIcon,
       description: "Aprende com respostas dos leads, ajusta discurso, refina argumentos e aumenta conversão de forma autônoma.",
       features: [
         "Machine learning especializado em medicina",
@@ -77,7 +91,8 @@ const Index = () => {
     },
     {
       title: "Prompts Adaptados para Medicina Premium",
-      subtitle: "🎯 Especialização Setorial",
+      subtitle: "Especialização Setorial",
+      icon: alvoIcon,
       description: "Construímos prompts 100% alinhados ao mercado médico, com ajustes baseados no seu posicionamento real.",
       features: [
         "Linguagem médica adequada por especialidade",
@@ -88,7 +103,8 @@ const Index = () => {
     },
     {
       title: "Abordagem Sob Medida para Cada Lead",
-      subtitle: "📋 Frameworks de Atendimento Médico",
+      subtitle: "Frameworks de Atendimento Médico",
+      icon: tarefaIcon,
       description: "Utiliza SPIN Selling, GPCT e RDO adaptados para medicina, interpretando respostas e quebrando objeções estrategicamente.",
       features: [
         "Qualificação médica especializada (BANT adaptado)",
@@ -99,7 +115,8 @@ const Index = () => {
     },
     {
       title: "Conversas Naturais Sem Traços Robóticos",
-      subtitle: "🗣️ Experiência Humana Premium",
+      subtitle: "Experiência Humana Premium",
+      icon: engrenagemIcon,
       description: "Voz feminina profissional, linguagem empática e condução fluida que transmite confiança e segurança.",
       features: [
         "Tom respeitoso adequado para medicina",
@@ -205,11 +222,14 @@ const Index = () => {
         <div className="max-w-6xl mx-auto text-center pt-20 relative z-10">
           <div className="animate-fade-in">
             <h1 className="text-3xl md:text-5xl xl:text-6xl font-montserrat font-bold mb-6 leading-tight">
-              A Primeira Inteligência Artificial de Atendimento
+              <span className="text-foreground">A Primeira </span>
+              <span className="text-primary">Inteligência Artificial</span>
+              <span className="text-foreground"> de Atendimento</span>
               <br />
-              <span className="text-primary">Desenvolvida Exclusivamente</span>
+              <span className="text-accent">Desenvolvida Exclusivamente</span>
               <br />
-              Para Clínicas e Institutos Médicos de Alto Padrão
+              <span className="text-foreground">Para Clínicas e Institutos Médicos de </span>
+              <span className="text-primary">Alto Padrão</span>
             </h1>
           </div>
           
@@ -239,9 +259,18 @@ const Index = () => {
             </Button>
             
             <div className="flex flex-col items-center gap-2 text-muted-foreground text-center">
-              <span className="flex items-center gap-2">⭐ +1.541% de crescimento em geração de leads</span>
-              <span className="flex items-center gap-2">✨ Especializada em medicina premium</span>
-              <span className="flex items-center gap-2">🏥 Primeira Atendimento IA especializada no setor de saúde de alto padrão no Brasil</span>
+              <span className="flex items-center gap-2">
+                <img src={graficoIcon} alt="Gráfico" className="w-5 h-5" />
+                +1.541% de crescimento em geração de leads
+              </span>
+              <span className="flex items-center gap-2">
+                <img src={alvoIcon} alt="Alvo" className="w-5 h-5" />
+                Especializada em medicina premium
+              </span>
+              <span className="flex items-center gap-2">
+                <img src={cerebroIcon} alt="Cérebro" className="w-5 h-5" />
+                Primeira Atendimento IA especializada no setor de saúde de alto padrão no Brasil
+              </span>
             </div>
           </div>
 
@@ -320,8 +349,11 @@ const Index = () => {
             {pillars.map((pillar, index) => (
               <Card key={index} className="p-6 border-2 hover:border-primary transition-all duration-300 hover:shadow-lg bg-card">
                 <CardContent className="p-0">
+                  <div className="flex items-center gap-3 mb-4">
+                    <img src={pillar.icon} alt={pillar.title} className="w-8 h-8" />
+                    <h4 className="text-md text-primary font-semibold">{pillar.subtitle}</h4>
+                  </div>
                   <h3 className="text-lg font-montserrat font-bold mb-2">{pillar.title}</h3>
-                  <h4 className="text-md text-primary mb-4">{pillar.subtitle}</h4>
                   <p className="text-muted-foreground mb-4">{pillar.description}</p>
                   <ul className="space-y-2">
                     {pillar.features.map((feature, idx) => (
@@ -360,7 +392,7 @@ const Index = () => {
           <div className="grid md:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">⚙️</span>
+                <img src={engrenagemIcon} alt="Configuração" className="w-8 h-8" />
               </div>
               <h3 className="text-xl font-montserrat font-bold mb-2">Configuração Especializada</h3>
               <p className="text-muted-foreground">Configuramos a IA com seus dados, especialidade médica e perfil de paciente ideal em 48 horas.</p>
@@ -369,7 +401,7 @@ const Index = () => {
 
             <div className="text-center">
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">🎯</span>
+                <img src={alvoIcon} alt="Definição ICP" className="w-8 h-8" />
               </div>
               <h3 className="text-xl font-montserrat font-bold mb-2">Definição de ICP Médico</h3>
               <p className="text-muted-foreground">Mapeamos seu Cliente Ideal (ICP) considerando especialidade, faixa etária e poder aquisitivo.</p>
@@ -378,7 +410,7 @@ const Index = () => {
 
             <div className="text-center">
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">🚀</span>
+                <img src={fogueteIcon} alt="Ativação" className="w-8 h-8" />
               </div>
               <h3 className="text-xl font-montserrat font-bold mb-2">Ativação do Atendimento IA</h3>
               <p className="text-muted-foreground">Atendimento IA inicia resposta automatizada 24/7 para todos os leads que chegam pelos seus canais.</p>
@@ -387,7 +419,7 @@ const Index = () => {
 
             <div className="text-center">
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <span className="text-white text-2xl">📊</span>
+                <img src={graficoIcon} alt="Resultados" className="w-8 h-8" />
               </div>
               <h3 className="text-xl font-montserrat font-bold mb-2">Resultados e Otimização</h3>
               <p className="text-muted-foreground">Acompanhe métricas em tempo real e receba agendamentos qualificados direto na agenda.</p>
@@ -433,7 +465,7 @@ const Index = () => {
                 ].map((item, index) => (
                   <div key={index} className="flex items-start gap-3">
                     <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center mt-1">
-                      <span className="text-white text-sm">✓</span>
+                      <img src={tickIcon} alt="Check" className="w-4 h-4" />
                     </div>
                     <span className="text-lg">{item}</span>
                   </div>
@@ -529,7 +561,9 @@ const Index = () => {
               { name: "RD Station", description: "Automação de marketing integrada com Atendimento IA" }
             ].map((crm, index) => (
               <Card key={index} className="p-6 text-center border-2 hover:border-primary transition-all duration-300 hover:shadow-lg bg-card">
-                <div className="text-2xl mb-2">🔗</div>
+                <div className="text-2xl mb-2">
+                  <img src={linkIcon} alt="CRM Integration" className="w-8 h-8 mx-auto" />
+                </div>
                 <h3 className="font-montserrat font-bold mb-2">{crm.name}</h3>
                 <p className="text-sm text-muted-foreground">{crm.description}</p>
               </Card>
@@ -544,7 +578,9 @@ const Index = () => {
               { name: "Analytics Médicos", description: "Relatórios específicos para métricas de saúde" }
             ].map((system, index) => (
               <Card key={index} className="p-6 text-center border-2 hover:border-primary transition-all duration-300 hover:shadow-lg bg-card">
-                <div className="text-2xl mb-2">🏥</div>
+                <div className="text-2xl mb-2">
+                  <img src={cerebroIcon} alt="Medical Systems" className="w-8 h-8 mx-auto" />
+                </div>
                 <h3 className="font-montserrat font-bold mb-2">{system.name}</h3>
                 <p className="text-sm text-muted-foreground">{system.description}</p>
               </Card>
@@ -569,7 +605,7 @@ const Index = () => {
                 {guarantees.map((guarantee, index) => (
                   <div key={index} className="flex items-start gap-3">
                     <div className="w-6 h-6 rounded-full bg-primary flex-shrink-0 flex items-center justify-center mt-1">
-                      <span className="text-white text-sm">✓</span>
+                      <img src={tickIcon} alt="Check" className="w-4 h-4" />
                     </div>
                     <span className="text-lg">{guarantee}</span>
                   </div>
@@ -581,16 +617,16 @@ const Index = () => {
               <h3 className="text-2xl font-montserrat font-bold mb-8">SUPORTE ESPECIALIZADO:</h3>
               <div className="space-y-4">
                 {[
-                  "🏥 Equipe com conhecimento médico",
-                  "📞 Suporte técnico 24/7 especializado",
-                  "🎓 Treinamentos mensais da equipe",
-                  "📊 Consultoria estratégica incluída",
-                  "🔄 Otimizações contínuas gratuitas",
-                  "📈 Relatórios médicos personalizados"
+                  { icon: cerebroIcon, text: "Equipe com conhecimento médico" },
+                  { icon: relogioIcon, text: "Suporte técnico 24/7 especializado" },
+                  { icon: tarefaIcon, text: "Treinamentos mensais da equipe" },
+                  { icon: graficoIcon, text: "Consultoria estratégica incluída" },
+                  { icon: engrenagemIcon, text: "Otimizações contínuas gratuitas" },
+                  { icon: graficoIcon, text: "Relatórios médicos personalizados" }
                 ].map((support, index) => (
                   <div key={index} className="flex items-start gap-3">
-                    <span className="text-primary">{support.split(' ')[0]}</span>
-                    <span className="text-lg">{support.substring(support.indexOf(' ') + 1)}</span>
+                    <img src={support.icon} alt={support.text} className="w-6 h-6 mt-1" />
+                    <span className="text-lg">{support.text}</span>
                   </div>
                 ))}
               </div>
