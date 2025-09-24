@@ -1,40 +1,22 @@
 import { MessageCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { useTracking } from "@/hooks/useTracking";
 
-interface WhatsAppButtonProps {
-  message: string;
-  className?: string;
-  children: React.ReactNode;
-  variant?: "default" | "outline" | "secondary" | "ghost" | "link" | "destructive";
-  size?: "default" | "sm" | "lg" | "icon";
-}
-
-const WhatsAppButton = ({ 
-  message, 
-  className, 
-  children, 
-  variant = "default",
-  size = "default" 
-}: WhatsAppButtonProps) => {
+const WhatsAppButton = () => {
   const { trackInteraction } = useTracking();
   
   const handleClick = () => {
-    trackInteraction('whatsapp_click', 'whatsapp_button', children?.toString());
-    const encodedMessage = encodeURIComponent(message);
-    window.open(`https://wa.me/551151926363?text=${encodedMessage}`, '_blank');
+    trackInteraction('whatsapp_click', 'whatsapp_floating_button', 'floating_whatsapp');
+    window.open('https://wa.me/551151926333?text=*Quero%20saber%20como%20voc%C3%AA%20consegue%20levar%20minha%20cl%C3%ADnica%20para%20o%20pr%C3%B3ximo%20nivel*', '_blank');
   };
 
   return (
-    <Button 
+    <button
       onClick={handleClick}
-      variant={variant}
-      size={size}
-      className={`gap-2 ${className || ''}`}
+      className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg transition-transform duration-300 hover:scale-110 hover:shadow-xl"
+      aria-label="WhatsApp"
     >
-      <MessageCircle className="h-4 w-4" />
-      {children}
-    </Button>
+      <MessageCircle size={24} />
+    </button>
   );
 };
 
