@@ -18,6 +18,7 @@ import linkIcon from "@/assets/link-icon.png";
 import engrenagemIcon from "@/assets/engrenagem-icon.png";
 import relogioIcon from "@/assets/relogio-icon.png";
 import tarefaIcon from "@/assets/tarefa-icon.png";
+import graficoCrescimento from "@/assets/grafico-crescimento.png";
 
 const Index = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -249,7 +250,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 animate-scale-in" style={{ animationDelay: '0.6s' }}>
+          <div className="animate-fade-in mb-8" style={{ animationDelay: '0.5s' }}>
             <Button 
               onClick={() => setIsDialogOpen(true)} 
               size="lg" 
@@ -257,33 +258,49 @@ const Index = () => {
             >
               Agendar Demo da IA em Funcionamento
             </Button>
-            
-            <div className="flex flex-col items-center gap-2 text-muted-foreground text-center">
-              <span className="flex items-center gap-2">
-                <img src={graficoIcon} alt="Gráfico" className="w-5 h-5" />
-                +1.541% de crescimento em geração de leads
-              </span>
-              <span className="flex items-center gap-2">
-                <img src={alvoIcon} alt="Alvo" className="w-5 h-5" />
-                Especializada em medicina premium
-              </span>
-              <span className="flex items-center gap-2">
-                <img src={cerebroIcon} alt="Cérebro" className="w-5 h-5" />
-                Primeira Atendimento IA especializada no setor de saúde de alto padrão no Brasil
-              </span>
-            </div>
           </div>
 
-          <div className="mt-16 bg-card/80 backdrop-blur-sm rounded-lg p-6 max-w-4xl mx-auto border border-border animate-fade-in" style={{ animationDelay: '0.8s' }}>
-            <p className="text-base md:text-lg leading-relaxed">
-              Se seu instituto médico ou clínica opera com pelo menos R$ 100K mensais,
-              <br />
-              mas possui infraestrutura e expertise para patamares superiores, esta é
-              <br />
-              uma oportunidade de integrar tecnologia pioneira que revoluciona o atendimento
-              <br />
-              na medicina premium.
-            </p>
+          <div className="flex flex-col items-center gap-2 text-muted-foreground text-center mb-16 animate-scale-in" style={{ animationDelay: '0.6s' }}>
+            <span className="flex items-center gap-2">
+              <img src={graficoIcon} alt="Gráfico" className="w-5 h-5" />
+              +1.541% de crescimento em geração de leads
+            </span>
+            <span className="flex items-center gap-2">
+              <img src={alvoIcon} alt="Alvo" className="w-5 h-5" />
+              Especializada em medicina premium
+            </span>
+            <span className="flex items-center gap-2">
+              <img src={cerebroIcon} alt="Cérebro" className="w-5 h-5" />
+              Primeira Atendimento IA especializada no setor de saúde de alto padrão no Brasil
+            </span>
+          </div>
+
+          <div className="mt-16 flex flex-col lg:flex-row items-center gap-8 max-w-6xl mx-auto animate-fade-in" style={{ animationDelay: '0.8s' }}>
+            <div className="bg-card/80 backdrop-blur-sm rounded-lg p-6 border border-border flex-1">
+              <p className="text-base md:text-lg leading-relaxed">
+                Se seu instituto médico ou clínica opera com pelo menos R$ 100K mensais,
+                <br />
+                mas possui infraestrutura e expertise para patamares superiores, esta é
+                <br />
+                uma oportunidade de integrar tecnologia pioneira que revoluciona o atendimento
+                <br />
+                na medicina premium.
+              </p>
+            </div>
+            <div className="flex-shrink-0">
+              <a
+                href="https://wa.me/551151926333?text=*Quero%20saber%20como%20voc%C3%AA%20consegue%20levar%20minha%20cl%C3%ADnica%20para%20o%20pr%C3%B3ximo%20nivel*"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block hover:scale-105 transition-transform duration-300"
+              >
+                <img 
+                  src={graficoCrescimento} 
+                  alt="Gráfico de crescimento" 
+                  className="w-64 h-auto cursor-pointer"
+                />
+              </a>
+            </div>
           </div>
         </div>
       </section>
