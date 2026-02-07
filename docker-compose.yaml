@@ -15,7 +15,7 @@ services:
           memory: 2048M
       labels:
         - traefik.enable=true
-        - traefik.http.routers.yeba_scalium.rule=Host(`vendas.yebatech.com.br`)
+        - traefik.http.routers.yeba_scalium.rule=Host(`scalium.yebatech.com.br`)
         - traefik.http.routers.yeba_scalium.entrypoints=websecure
         - traefik.http.routers.yeba_scalium.tls.certresolver=letsencryptresolver
         - traefik.http.routers.yeba_scalium.priority=1
