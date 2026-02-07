@@ -1,0 +1,30 @@
+services:
+  yeba_scalium:
+    image: yebatech/vendas-master:latest
+    networks:
+      - apollo
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "4"
+          memory: 2048M
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.yeba_scalium.rule=Host(`vendas.yebatech.com.br`)
+        - traefik.http.routers.yeba_scalium.entrypoints=websecure
+        - traefik.http.routers.yeba_scalium.tls.certresolver=letsencryptresolver
+        - traefik.http.routers.yeba_scalium.priority=1
+        - traefik.http.routers.yeba_scalium.service=yeba_scalium
+        - traefik.http.services.yeba_scalium.loadbalancer.server.port=80
+        - traefik.http.services.yeba_scalium.loadbalancer.passHostHeader=true
+        - traefik.http.middlewares.sslheader.headers.customrequestheaders.X-Forwarded-Proto=https
+        - traefik.http.routers.yeba_scalium.middlewares=sslheader
+
+networks:
+  apollo:
+    external: true
