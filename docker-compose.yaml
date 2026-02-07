@@ -1,6 +1,6 @@
 services:
   yeba_scalium:
-    image: yebatech/vendas-master:latest
+    image: yebatech/scalium:latest
     networks:
       - apollo
     deploy:
